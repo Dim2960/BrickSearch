@@ -172,3 +172,15 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+
+# personnal
+descriptif_projet/*
+images/*
+via-2.0.12/*
+.venv/*
+data/*
+
+.python-version
+pyproject.toml
+uv.lock
