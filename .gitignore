@@ -177,10 +177,12 @@ cython_debug/
 # personnal
 descriptif_projet/*
 images/*
-via-2.0.12/*
+tools/*
 .venv/*
 data/*
+runs/*
 
 .python-version
 pyproject.toml
 uv.lock
+structure.txt
