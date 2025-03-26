@@ -17,3 +17,62 @@ Le principal objectif est de développer un outil ou un ensemble de scripts perm
 
 En centralisant et en automatisant ces tâches, le projet **Recherche de pièces LEGO** vise à rendre la recherche plus rapide et plus précise, que ce soit pour des utilisateurs occasionnels ou des utilisateurs avertis.
 
+Voici une proposition de **complément** au README existant. Le texte original reste inchangé ; seul du contenu additionnel est proposé pour présenter la structure des répertoires et expliquer le rôle de certains fichiers clés identifiés dans le projet.
+
+---
+
+## Structure du projet
+
+Le dépôt s’organise de la manière suivante :
+
+```
+.
+├── data
+│   ├── annotations_files
+│   │   └── Annotation_train_set.json
+│   ├── dataset
+│   │   ├── data.yaml
+│   │   ├── test
+│   │   └── train
+│   │   └── val
+│   ├── model
+│   └── raw
+├── docs
+├── ouputs
+│   ├── images_annotees
+│   ├── json_annotation_img
+│   └── output_models
+├── scripts
+│   └── Notebooks
+│       ├── conversion-YoloA_from_VggIA.ipynb
+│       ├── test_model.ipynb
+│       └── train_model.ipynb
+├── tools
+│   └── via-2.0.12
+├── LICENSE
+└── README.md
+
+
+```
+
+- **`data/`** : Contient les jeux de données (images brutes, labels, fichiers d’annotations).  
+  - **`annotations_files/Annotation_train_set.json`** : Exemple de fichier d’annotations généré via le VGG Image Annotator (VIA).  
+  - **`dataset/`** : Répertoire principal pour l’entraînement, la validation et le test (sous-répertoires `train`, `val` et `test`).  
+  - **`model/`** : Stocke les poids pré-entraînés .  
+  - **`raw/`** : Fichiers d’images brutes, non annotées.
+
+- **`docs/`** : Rassemble la documentation associée au projet (ex. : Objectif, Etapes, guides, fichiers bureautiques).
+
+- **`ouputs/`** : Contient les résultats (images annotées, JSON final, rapports de performance et poids finaux du modèle).
+
+- **`scripts/Notebooks/`** :  
+  - **`conversion-YoloA_from_VggIA.ipynb`** : Notebook pour convertir ou adapter les annotations du format VGG Image Annotator (VIA) en un format exploitable par YOLO ou inversement.  
+  - **`test_model.ipynb`** : Permet de tester le modèle entraîné sur un ensemble de données de test.  
+  - **`train_model.ipynb`** : Lance le processus d’entraînement du modèle YOLO sur les images annotées.
+
+- **`tools/via-2.0.12/`** : Fichiers relatifs à l’outil VGG Image Annotator (VIA), utilisé pour la création et la gestion des annotations.
+
+- **Fichiers de configuration** :  
+  - **`LICENSE`** : Conditions de licence et de redistribution du projet.  
+
+---
