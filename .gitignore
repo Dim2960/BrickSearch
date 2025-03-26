@@ -181,7 +181,7 @@ tools/*
 .venv/*
 data/*
 runs/*
-output/output_models/*
+outputs/output_models/*
 
 .python-version
 pyproject.toml
