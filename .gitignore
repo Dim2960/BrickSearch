@@ -182,6 +182,7 @@ tools/*
 data/*
 runs/*
 outputs/output_models/*
+outputs/videos_annotees/*
 
 .python-version
 pyproject.toml
