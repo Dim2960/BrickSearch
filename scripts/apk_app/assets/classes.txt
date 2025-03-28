@@ -1,0 +1,26 @@
+1x2_Blanc
+1x2_Bleu
+1x2_Jaune
+1x2_Marron
+1x2_Noir
+1x2_Rouge
+1x2_Vert clear
+1x2_Vert dark
+1x4_Blanc
+1x4_Jaune
+1x4_Noir
+1x4_Rouge
+1x4_Vert clear
+1x4_Vert dark
+2x2_Blanc
+2x2_Bleu
+2x2_Jaune
+2x2_Marron
+2x2_Rouge
+2x2_Vert clear
+2x2_Vert dark
+2x4_Blanc
+2x4_Bleu
+2x4_Jaune
+2x4_Rouge
+2x4_Vert dark
