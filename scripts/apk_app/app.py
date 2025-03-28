@@ -40,7 +40,7 @@ class KivyCamera(Image):
 
 class YOLOKivyApp(App):
     def build(self):
-        self.capture = cv2.VideoCapture("data/raw/videos/lego_video_test.mp4")
+        self.capture = cv2.VideoCapture(0)
         # Vous pouvez préciser explicitement le task pour éviter l'avertissement, par exemple:
         self.model = YOLO("scripts/apk_app/best.onnx", task="detect")
         self.selected_class = 23  # Valeur par défaut
