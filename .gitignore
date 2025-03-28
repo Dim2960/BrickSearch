@@ -188,3 +188,10 @@ outputs/videos_annotees/*
 pyproject.toml
 uv.lock
 structure.txt
+buildozer.spec
+requirements.txt
+
+
+*.engine
+*.pt
+*.onnx
