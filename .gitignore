@@ -175,14 +175,16 @@ cython_debug/
 
 
 # personnal
-descriptif_projet/*
-images/*
+
+bin/*
 tools/*
 .venv/*
 data/*
 runs/*
+docs/*
 outputs/output_models/*
 outputs/videos_annotees/*
+.buildozer/*
 
 .python-version
 pyproject.toml

@@ -1,5 +1,0 @@
-flask
-flask-limiter
-ultralytics
-opencv-python
-numpy
