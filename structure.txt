@@ -1,0 +1,677 @@
+.
+├── data
+│   ├── annotations_files
+│   │   └── Annotation_train_set.json
+│   ├── dataset
+│   │   ├── data.yaml
+│   │   ├── data.yaml.zip
+│   │   ├── test
+│   │   │   ├── images
+│   │   │   │   ├── IMG-20250325-WA0033.jpg
+│   │   │   │   └── IMG-20250325-WA0034.jpg
+│   │   │   └── labels
+│   │   ├── train
+│   │   │   ├── images
+│   │   │   │   ├── IMG-20250325-WA0003.jpg
+│   │   │   │   ├── IMG-20250325-WA0004.jpg
+│   │   │   │   ├── IMG-20250325-WA0005.jpg
+│   │   │   │   ├── IMG-20250325-WA0006.jpg
+│   │   │   │   ├── IMG-20250325-WA0007.jpg
+│   │   │   │   └── IMG-20250325-WA0008.jpg
+│   │   │   ├── labels
+│   │   │   │   ├── classes.txt
+│   │   │   │   ├── IMG-20250325-WA0003.txt
+│   │   │   │   ├── IMG-20250325-WA0004.txt
+│   │   │   │   ├── IMG-20250325-WA0005.txt
+│   │   │   │   ├── IMG-20250325-WA0006.txt
+│   │   │   │   ├── IMG-20250325-WA0007.txt
+│   │   │   │   └── IMG-20250325-WA0008.txt
+│   │   │   └── labels.cache
+│   │   └── val
+│   │       ├── images
+│   │       │   ├── IMG-20250325-WA0009.jpg
+│   │       │   └── IMG-20250325-WA0010.jpg
+│   │       ├── labels
+│   │       │   ├── classes.txt
+│   │       │   ├── IMG-20250325-WA0009.txt
+│   │       │   └── IMG-20250325-WA0010.txt
+│   │       └── labels.cache
+│   ├── model
+│   │   ├── yolo11n-cls.pt
+│   │   ├── yolo11n-obb.pt
+│   │   ├── yolo11n.pt
+│   │   ├── yolo11x.pt
+│   │   ├── yolo12m.pt
+│   │   ├── yolo12n.pt
+│   │   └── yolo12x.pt
+│   └── raw
+│       ├── images_brut
+│       │   ├── IMG-20250325-WA0011.jpg
+│       │   ├── IMG-20250325-WA0012.jpg
+│       │   ├── IMG-20250325-WA0013.jpg
+│       │   ├── IMG-20250325-WA0014.jpg
+│       │   ├── IMG-20250325-WA0015.jpg
+│       │   ├── IMG-20250325-WA0016.jpg
+│       │   ├── IMG-20250325-WA0017.jpg
+│       │   ├── IMG-20250325-WA0018.jpg
+│       │   ├── IMG-20250325-WA0019.jpg
+│       │   ├── IMG-20250325-WA0020.jpg
+│       │   ├── IMG-20250325-WA0021.jpg
+│       │   ├── IMG-20250325-WA0022.jpg
+│       │   ├── IMG-20250325-WA0023.jpg
+│       │   ├── IMG-20250325-WA0024.jpg
+│       │   ├── IMG-20250325-WA0025.jpg
+│       │   ├── IMG-20250325-WA0026.jpg
+│       │   ├── IMG-20250325-WA0027.jpg
+│       │   ├── IMG-20250325-WA0028.jpg
+│       │   ├── IMG-20250325-WA0029.jpg
+│       │   ├── IMG-20250325-WA0030.jpg
+│       │   ├── IMG-20250325-WA0031.jpg
+│       │   ├── IMG-20250325-WA0032.jpg
+│       │   ├── IMG-20250325-WA0035.jpg
+│       │   ├── IMG-20250325-WA0036.jpg
+│       │   └── IMG-20250325-WA0037.jpg
+│       └── videos
+│           ├── lego_video_clean.mp4
+│           └── lego_video_test.mp4
+├── docs
+│   ├── 10_app_recherche_piece_lego.xlsx
+│   └── Etapes projet.docx
+├── LICENSE
+├── outputs
+│   ├── images_annotees
+│   │   └── image_annotée.jpg
+│   ├── json_annotation_img
+│   │   └── Annotation_train_set.json
+│   ├── output_models
+│   │   ├── lego_result
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch90.jpg
+│   │   │   ├── train_batch91.jpg
+│   │   │   ├── train_batch92.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── lego_result_50epoch
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch40.jpg
+│   │   │   ├── train_batch41.jpg
+│   │   │   ├── train_batch42.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── No_name_model
+│   │   │   ├── args.yaml
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── results.csv
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── No_name_model2
+│   │   │   ├── args.yaml
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── results.csv
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── param_200_640_3000_16_0_065
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch190.jpg
+│   │   │   ├── train_batch191.jpg
+│   │   │   ├── train_batch192.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── test_hyper_param
+│   │   │   ├── args.yaml
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── results.csv
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── y11n_100_640
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch90.jpg
+│   │   │   ├── train_batch91.jpg
+│   │   │   ├── train_batch92.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── y11n-cls_300
+│   │   │   ├── args.yaml
+│   │   │   └── weights
+│   │   ├── y11n_wmodel_100_640
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch90.jpg
+│   │   │   ├── train_batch91.jpg
+│   │   │   ├── train_batch92.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── y11x_200_640_3000_16_0_065
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch190.jpg
+│   │   │   ├── train_batch191.jpg
+│   │   │   ├── train_batch192.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── y12m_100_320_cuda_30_100_05
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch90.jpg
+│   │   │   ├── train_batch91.jpg
+│   │   │   ├── train_batch92.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.onnx
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── y12m_100_640_c_10_100_05
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch90.jpg
+│   │   │   ├── train_batch91.jpg
+│   │   │   ├── train_batch92.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.onnx
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── y12m_100_640_c_10_10_05
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch90.jpg
+│   │   │   ├── train_batch91.jpg
+│   │   │   ├── train_batch92.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.engine
+│   │   │       ├── best.onnx
+│   │   │       ├── best.pt
+│   │   │       ├── best_saved_model
+│   │   │       │   ├── assets
+│   │   │       │   ├── best_float16.tflite
+│   │   │       │   ├── best_float32.tflite
+│   │   │       │   ├── fingerprint.pb
+│   │   │       │   ├── metadata.yaml
+│   │   │       │   ├── saved_model.pb
+│   │   │       │   └── variables
+│   │   │       │       ├── variables.data-00000-of-00001
+│   │   │       │       └── variables.index
+│   │   │       └── last.pt
+│   │   ├── y12m_100_cuda
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch90.jpg
+│   │   │   ├── train_batch91.jpg
+│   │   │   ├── train_batch92.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── y12m_essai_multi_param
+│   │   │   ├── args.yaml
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── results.csv
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       ├── epoch0.pt
+│   │   │       ├── epoch10.pt
+│   │   │       ├── epoch20.pt
+│   │   │       ├── epoch30.pt
+│   │   │       └── last.pt
+│   │   ├── y12m_multi_param_test2
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.engine
+│   │   │       ├── best.onnx
+│   │   │       ├── best.pt
+│   │   │       ├── epoch0.pt
+│   │   │       ├── epoch100.pt
+│   │   │       ├── epoch10.pt
+│   │   │       ├── epoch110.pt
+│   │   │       ├── epoch120.pt
+│   │   │       ├── epoch130.pt
+│   │   │       ├── epoch140.pt
+│   │   │       ├── epoch150.pt
+│   │   │       ├── epoch160.pt
+│   │   │       ├── epoch170.pt
+│   │   │       ├── epoch180.pt
+│   │   │       ├── epoch190.pt
+│   │   │       ├── epoch200.pt
+│   │   │       ├── epoch20.pt
+│   │   │       ├── epoch210.pt
+│   │   │       ├── epoch220.pt
+│   │   │       ├── epoch230.pt
+│   │   │       ├── epoch240.pt
+│   │   │       ├── epoch250.pt
+│   │   │       ├── epoch260.pt
+│   │   │       ├── epoch30.pt
+│   │   │       ├── epoch40.pt
+│   │   │       ├── epoch50.pt
+│   │   │       ├── epoch60.pt
+│   │   │       ├── epoch70.pt
+│   │   │       ├── epoch80.pt
+│   │   │       ├── epoch90.pt
+│   │   │       └── last.pt
+│   │   ├── y12n_100_cuda
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch90.jpg
+│   │   │   ├── train_batch91.jpg
+│   │   │   ├── train_batch92.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── y12n_300
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── events.out.tfevents.1743584252.DESKTOP-07SBNO0.3710.0
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       ├── epoch0.pt
+│   │   │       ├── epoch100.pt
+│   │   │       ├── epoch10.pt
+│   │   │       ├── epoch110.pt
+│   │   │       ├── epoch120.pt
+│   │   │       ├── epoch130.pt
+│   │   │       ├── epoch140.pt
+│   │   │       ├── epoch150.pt
+│   │   │       ├── epoch160.pt
+│   │   │       ├── epoch170.pt
+│   │   │       ├── epoch180.pt
+│   │   │       ├── epoch190.pt
+│   │   │       ├── epoch200.pt
+│   │   │       ├── epoch20.pt
+│   │   │       ├── epoch210.pt
+│   │   │       ├── epoch220.pt
+│   │   │       ├── epoch230.pt
+│   │   │       ├── epoch240.pt
+│   │   │       ├── epoch250.pt
+│   │   │       ├── epoch260.pt
+│   │   │       ├── epoch270.pt
+│   │   │       ├── epoch280.pt
+│   │   │       ├── epoch290.pt
+│   │   │       ├── epoch30.pt
+│   │   │       ├── epoch40.pt
+│   │   │       ├── epoch50.pt
+│   │   │       ├── epoch60.pt
+│   │   │       ├── epoch70.pt
+│   │   │       ├── epoch80.pt
+│   │   │       ├── epoch90.pt
+│   │   │       └── last.pt
+│   │   ├── y12n_75_640_3000_16_0cuda_065
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch65.jpg
+│   │   │   ├── train_batch66.jpg
+│   │   │   ├── train_batch67.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── y12n_75_640_cuda
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch65.jpg
+│   │   │   ├── train_batch66.jpg
+│   │   │   ├── train_batch67.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── y12x_100_640_3000_16_0_065
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch90.jpg
+│   │   │   ├── train_batch91.jpg
+│   │   │   ├── train_batch92.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.onnx
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── y12x_100_640_c_10_10_0-5
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── train_batch90.jpg
+│   │   │   ├── train_batch91.jpg
+│   │   │   ├── train_batch92.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.engine
+│   │   │       ├── best.onnx
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   ├── y12x_300_640_c_-_10_0-5
+│   │   │   ├── args.yaml
+│   │   │   ├── confusion_matrix_normalized.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── F1_curve.png
+│   │   │   ├── labels_correlogram.jpg
+│   │   │   ├── labels.jpg
+│   │   │   ├── P_curve.png
+│   │   │   ├── PR_curve.png
+│   │   │   ├── R_curve.png
+│   │   │   ├── results.csv
+│   │   │   ├── results.png
+│   │   │   ├── train_batch0.jpg
+│   │   │   ├── train_batch1.jpg
+│   │   │   ├── train_batch2.jpg
+│   │   │   ├── val_batch0_labels.jpg
+│   │   │   ├── val_batch0_pred.jpg
+│   │   │   └── weights
+│   │   │       ├── best.engine
+│   │   │       ├── best.onnx
+│   │   │       ├── best.pt
+│   │   │       └── last.pt
+│   │   └── y12x_300_640_c_10_10_0-5
+│   │       ├── args.yaml
+│   │       ├── confusion_matrix_normalized.png
+│   │       ├── confusion_matrix.png
+│   │       ├── F1_curve.png
+│   │       ├── labels_correlogram.jpg
+│   │       ├── labels.jpg
+│   │       ├── P_curve.png
+│   │       ├── PR_curve.png
+│   │       ├── R_curve.png
+│   │       ├── results.csv
+│   │       ├── results.png
+│   │       ├── train_batch0.jpg
+│   │       ├── train_batch1.jpg
+│   │       ├── train_batch2.jpg
+│   │       ├── val_batch0_labels.jpg
+│   │       ├── val_batch0_pred.jpg
+│   │       └── weights
+│   │           ├── best.engine
+│   │           ├── best.onnx
+│   │           ├── best.pt
+│   │           └── last.pt
+│   └── video_annotees
+├── pyproject.toml
+├── README.md
+├── scripts
+│   ├── apk_app
+│   │   ├── app.py
+│   │   ├── assets
+│   │   │   └── model.onnx
+│   │   ├── bin
+│   │   └── buildozer.spec
+│   ├── Notebooks
+│   │   ├── conversion-YoloA_from_VggIA.ipynb
+│   │   ├── test_model_img.ipynb
+│   │   ├── test_model_video_fast.ipynb
+│   │   ├── test_model_video.ipynb
+│   │   ├── train_model.ipynb
+│   │   └── yolo11n.pt
+│   └── web_app
+│       ├── app.py
+│       ├── Dockerfile
+│       └── templates
+│           └── index.html
+├── structure.txt
+├── tools
+│   └── via-2.0.12
+│       ├── CHANGELOG
+│       ├── Contributors.md
+│       ├── LICENSE
+│       ├── README.md
+│       ├── via_demo.html
+│       └── via.html
+└── uv.lock
+
+82 directories, 592 files

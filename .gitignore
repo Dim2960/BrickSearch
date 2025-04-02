@@ -184,14 +184,18 @@ runs/*
 docs/*
 outputs/output_models/*
 outputs/videos_annotees/*
-.buildozer/*
+scripts/apk_app/.buildozer/*
+scripts/apk_app/bin
+scripts/web_app/*
 
 .python-version
 pyproject.toml
 uv.lock
-structure.txt
+
 buildozer.spec
 requirements.txt
+
+Dockerfile
 
 
 *.engine

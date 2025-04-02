@@ -7,17 +7,15 @@ Les passionnés de LEGO connaissent souvent la difficulté de retrouver une piè
 
 ## Problématique
 - **Complexité des références** : LEGO propose de très nombreuses pièces, chacune possédant des numéros d’identification, des variations de couleurs.
-- **Organisation des inventaires** : LMa recherche efficace d’une pièce demeure un défi, surtout quand les quantités deviennent importantes.
+- **Organisation des inventaires** : La recherche efficace d’une pièce demeure un défi, surtout quand les quantités deviennent importantes.
 - **Gain de temps et fiabilité** : L’identification manuelle de chaque pièce peut prendre un temps considérable.
 
 ## Objectif
 Le principal objectif est de développer un outil ou un ensemble de scripts permettant :
-1. D’identifier rapidement une pièce LEGO à partir d’une photo, d'une vidéo.
+1. D’identifier rapidement une pièce LEGO à partir d’une photo ou d’une vidéo.
 2. De fournir à l’utilisateur des informations pertinentes sur la pièce recherchée (numéro, nom exact, disponibilité, prix indicatif, etc.).
 
 En centralisant et en automatisant ces tâches, le projet **Recherche de pièces LEGO** vise à rendre la recherche plus rapide et plus précise, que ce soit pour des utilisateurs occasionnels ou des utilisateurs avertis.
-
-Voici une proposition de **complément** au README existant. Le texte original reste inchangé ; seul du contenu additionnel est proposé pour présenter la structure des répertoires et expliquer le rôle de certains fichiers clés identifiés dans le projet.
 
 ---
 
@@ -34,11 +32,11 @@ Le dépôt s’organise de la manière suivante :
 │   │   ├── data.yaml
 │   │   ├── test
 │   │   └── train
-│   │   └── val
+│   └── val
 │   ├── model
 │   └── raw
 ├── docs
-├── ouputs
+├── outputs
 │   ├── images_annotees
 │   ├── json_annotation_img
 │   └── output_models
@@ -51,22 +49,20 @@ Le dépôt s’organise de la manière suivante :
 │   └── via-2.0.12
 ├── LICENSE
 └── README.md
-
-
 ```
 
 - **`data/`** : Contient les jeux de données (images brutes, labels, fichiers d’annotations).  
   - **`annotations_files/Annotation_train_set.json`** : Exemple de fichier d’annotations généré via le VGG Image Annotator (VIA).  
   - **`dataset/`** : Répertoire principal pour l’entraînement, la validation et le test (sous-répertoires `train`, `val` et `test`).  
-  - **`model/`** : Stocke les poids pré-entraînés .  
+  - **`model/`** : Stocke les poids pré-entraînés.  
   - **`raw/`** : Fichiers d’images brutes, non annotées.
 
-- **`docs/`** : Rassemble la documentation associée au projet (ex. : Objectif, Etapes, guides, fichiers bureautiques).
+- **`docs/`** : Rassemble la documentation associée au projet (ex. : Objectif, Étapes, guides, fichiers bureautiques).
 
-- **`ouputs/`** : Contient les résultats (images annotées, JSON final, rapports de performance et poids finaux du modèle).
+- **`outputs/`** : Contient les résultats (images annotées, JSON final, rapports de performance et poids finaux du modèle).
 
 - **`scripts/Notebooks/`** :  
-  - **`conversion-YoloA_from_VggIA.ipynb`** : Notebook pour convertir ou adapter les annotations du format VGG Image Annotator (VIA) en un format exploitable par YOLO ou inversement.  
+  - **`conversion-YoloA_from_VggIA.ipynb`** : Notebook pour convertir ou adapter les annotations du format VGG Image Annotator (VIA) en un format exploitable par YOLO.  
   - **`test_model.ipynb`** : Permet de tester le modèle entraîné sur un ensemble de données de test.  
   - **`train_model.ipynb`** : Lance le processus d’entraînement du modèle YOLO sur les images annotées.
 
@@ -76,3 +72,79 @@ Le dépôt s’organise de la manière suivante :
   - **`LICENSE`** : Conditions de licence et de redistribution du projet.  
 
 ---
+
+## Annotation des images avec VIA (VGG Image Annotator)
+
+Cette étape est **essentielle** pour créer des jeux de données correctement annotés, utilisables par les algorithmes de détection d’objets (comme YOLO).
+
+1. **Installation ou utilisation de VIA**  
+   - Vous pouvez télécharger et exécuter VIA directement depuis le répertoire `tools/via-2.0.12`.  
+   - Ouvrez simplement le fichier `index.html` dans votre navigateur.  
+   - Vous pouvez également vous rendre sur le [dépôt GitHub officiel de VIA](https://www.robots.ox.ac.uk/~vgg/software/via/) (si besoin, hors-ligne ou version plus récente).
+
+2. **Préparation des images**  
+   - Placez vos images dans un répertoire (par exemple, `data/raw` ou `data/dataset/train`).  
+   - Lancez VIA et créez un **nouveau projet** en important toutes les images à annoter.
+
+3. **Création des annotations**  
+   - Dans VIA, sélectionnez chaque image et dessinez des bounding boxes (ou polygones) autour des pièces LEGO à reconnaître.  
+   - Attribuez un label (ou *region attribute*) à chacune de ces zones : par exemple, le type de pièce, sa référence, etc.  
+   - Enregistrez régulièrement votre travail pour éviter les pertes de données.
+
+4. **Exportation des annotations**  
+   - Une fois l’annotation terminée, exportez le projet. VIA génère un fichier JSON (similaire à `Annotation_train_set.json`).  
+   - Veillez à bien nommer le fichier (ex. : `Annotation_train_set.json` ou `Annotation_val_set.json`, selon l’ensemble annoté).  
+   - Conservez ce fichier dans le dossier `data/annotations_files` ou un emplacement de votre choix pour la suite.
+
+---
+
+## Conversion du JSON pour YOLO
+
+YOLO exige un format d’annotation différent du JSON produit par VIA. Afin de faciliter cette conversion, nous proposons un **Notebook** dédié :
+
+1. **Notebook de conversion**  
+   - Dans le répertoire `scripts/Notebooks/`, ouvrez le fichier `conversion-YoloA_from_VggIA.ipynb`.  
+   - Ce Notebook lit le fichier JSON produit par VIA et génère des fichiers d’annotation compatibles avec YOLO.  
+
+2. **Fonctionnement (aperçu)**  
+   - Le script extrait pour chaque image :  
+     - le chemin de l’image,  
+     - les coordonnées des bounding boxes,  
+     - la catégorie associée (label).  
+   - Il calcule ensuite les valeurs normalisées **(x_center, y_center, width, height)** attendues par YOLO.  
+   - Enfin, il écrit un **fichier texte** (par image) contenant ces informations au format YOLO.  
+
+3. **Organisation du jeu de données pour YOLO**  
+   - Placez les fichiers texte d’annotations générés dans les sous-répertoires `train` et `val` de `data/dataset/`, en respectant la même structure que celle des images.  
+   - Assurez-vous que la variable `path` ou `img_path` dans le Notebook correspond bien à l’emplacement de vos images.
+
+4. **Vérification**  
+   - Après la conversion, vérifiez que les fichiers .txt correspondent correctement aux images.  
+   - Une simple vérification peut être faite avec un outil de visualisation d’annotations YOLO ou via le Notebook de test.
+
+---
+
+## Entraînement et Fine-tuning du modèle YOLO
+
+Une fois vos images annotées et converties :
+
+1. **Préparation du répertoire**  
+   - Assurez-vous que la structure `train` / `val` / `test` est cohérente dans `data/dataset/`.  
+   - Vérifiez également le contenu du fichier `data.yaml` (dans `data/dataset/`) : il doit pointer vers les bons chemins et répertorier correctement les classes.
+
+2. **Lancement de l’entraînement**  
+   - Le Notebook `train_model.ipynb` (dans `scripts/Notebooks/`) vous permet de lancer un entraînement YOLO (version dépendante de vos besoins : YOLOv5, YOLOv7, etc.).  
+   - Paramétrez vos hyperparamètres (batch size, epochs, etc.) avant de démarrer.
+
+3. **Évaluation**  
+   - Utilisez le Notebook `test_model.ipynb` pour évaluer la performance du modèle sur le dossier de test (`data/dataset/test`) et générer des métriques (mAP, Recall, Precision, etc.).  
+
+4. **Itérations et améliorations**  
+   - Si les résultats ne sont pas satisfaisants, retournez à l’étape d’annotation ou ajustez votre data augmentation / hyperparamètres.  
+   - Vous pouvez également affiner le partitionnement `train/val/test` pour obtenir de meilleures performances.
+
+---
+
+
+Pour toute question ou contribution, n’hésitez pas à ouvrir une **issue** ou à proposer une **pull request**.
+
