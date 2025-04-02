@@ -31,20 +31,19 @@ Le dépôt s’organise de la manière suivante :
 │   ├── dataset
 │   │   ├── data.yaml
 │   │   ├── test
-│   │   └── train
-│   └── val
+│   │   ├── train
+│   │   └── val
 │   ├── model
 │   └── raw
 ├── docs
 ├── outputs
 │   ├── images_annotees
 │   ├── json_annotation_img
-│   └── output_models
+│   ├── output_models
+│   └── video_annotees
 ├── scripts
+│   ├── apk_app
 │   └── Notebooks
-│       ├── conversion-YoloA_from_VggIA.ipynb
-│       ├── test_model.ipynb
-│       └── train_model.ipynb
 ├── tools
 │   └── via-2.0.12
 ├── LICENSE
@@ -59,12 +58,15 @@ Le dépôt s’organise de la manière suivante :
 
 - **`docs/`** : Rassemble la documentation associée au projet (ex. : Objectif, Étapes, guides, fichiers bureautiques).
 
-- **`outputs/`** : Contient les résultats (images annotées, JSON final, rapports de performance et poids finaux du modèle).
+- **`outputs/`** : Contient les résultats (images ou vidéps annotées, JSON d'annotation, rapports de performance et poids finaux du modèle).
+
+- **`scripts/apk_app/`** :  sources de l'application android de détection 
 
 - **`scripts/Notebooks/`** :  
   - **`conversion-YoloA_from_VggIA.ipynb`** : Notebook pour convertir ou adapter les annotations du format VGG Image Annotator (VIA) en un format exploitable par YOLO.  
   - **`test_model.ipynb`** : Permet de tester le modèle entraîné sur un ensemble de données de test.  
   - **`train_model.ipynb`** : Lance le processus d’entraînement du modèle YOLO sur les images annotées.
+  - **`test_model_video_fast.ipynb`** : Permet de tester le modèle entraîné sur un flux video.  
 
 - **`tools/via-2.0.12/`** : Fichiers relatifs à l’outil VGG Image Annotator (VIA), utilisé pour la création et la gestion des annotations.
 
@@ -75,32 +77,30 @@ Le dépôt s’organise de la manière suivante :
 
 ## Annotation des images avec VIA (VGG Image Annotator)
 
-Cette étape est **essentielle** pour créer des jeux de données correctement annotés, utilisables par les algorithmes de détection d’objets (comme YOLO).
+Cette étape est **essentielle** pour créer des jeux de données correctement annotés, utilisables par les algorithmes de détection d’objets.
 
 1. **Installation ou utilisation de VIA**  
-   - Vous pouvez télécharger et exécuter VIA directement depuis le répertoire `tools/via-2.0.12`.  
+   - Vous pouvez vous rendre sur le [dépôt GitHub officiel de VIA](https://www.robots.ox.ac.uk/~vgg/software/via/) pour télécharger l'outil.
    - Ouvrez simplement le fichier `index.html` dans votre navigateur.  
-   - Vous pouvez également vous rendre sur le [dépôt GitHub officiel de VIA](https://www.robots.ox.ac.uk/~vgg/software/via/) (si besoin, hors-ligne ou version plus récente).
 
 2. **Préparation des images**  
    - Placez vos images dans un répertoire (par exemple, `data/raw` ou `data/dataset/train`).  
    - Lancez VIA et créez un **nouveau projet** en important toutes les images à annoter.
 
 3. **Création des annotations**  
-   - Dans VIA, sélectionnez chaque image et dessinez des bounding boxes (ou polygones) autour des pièces LEGO à reconnaître.  
-   - Attribuez un label (ou *region attribute*) à chacune de ces zones : par exemple, le type de pièce, sa référence, etc.  
-   - Enregistrez régulièrement votre travail pour éviter les pertes de données.
+   - Dans VIA, sélectionnez chaque image et dessinez des bounding boxes autour des pièces LEGO à reconnaître.  
+   - Attribuez un label à chacune de ces zones : par exemple, le type de pièce, sa couleur.  
 
 4. **Exportation des annotations**  
    - Une fois l’annotation terminée, exportez le projet. VIA génère un fichier JSON (similaire à `Annotation_train_set.json`).  
    - Veillez à bien nommer le fichier (ex. : `Annotation_train_set.json` ou `Annotation_val_set.json`, selon l’ensemble annoté).  
-   - Conservez ce fichier dans le dossier `data/annotations_files` ou un emplacement de votre choix pour la suite.
+   - Conservez ce fichier dans le dossier `data/annotations_files` ou un emplacement de votre choix.
 
 ---
 
 ## Conversion du JSON pour YOLO
 
-YOLO exige un format d’annotation différent du JSON produit par VIA. Afin de faciliter cette conversion, nous proposons un **Notebook** dédié :
+YOLO exige un format d’annotation différent du JSON produit par VIA. Afin de faciliter cette conversion, vous pouvez utiliser le **Notebook** dédié :
 
 1. **Notebook de conversion**  
    - Dans le répertoire `scripts/Notebooks/`, ouvrez le fichier `conversion-YoloA_from_VggIA.ipynb`.  
@@ -120,11 +120,11 @@ YOLO exige un format d’annotation différent du JSON produit par VIA. Afin de 
 
 4. **Vérification**  
    - Après la conversion, vérifiez que les fichiers .txt correspondent correctement aux images.  
-   - Une simple vérification peut être faite avec un outil de visualisation d’annotations YOLO ou via le Notebook de test.
+   - Une simple vérification peut être faite via le Notebook de test.
 
 ---
 
-## Entraînement et Fine-tuning du modèle YOLO
+## Fine-tuning du modèle YOLO
 
 Une fois vos images annotées et converties :
 
@@ -133,11 +133,14 @@ Une fois vos images annotées et converties :
    - Vérifiez également le contenu du fichier `data.yaml` (dans `data/dataset/`) : il doit pointer vers les bons chemins et répertorier correctement les classes.
 
 2. **Lancement de l’entraînement**  
-   - Le Notebook `train_model.ipynb` (dans `scripts/Notebooks/`) vous permet de lancer un entraînement YOLO (version dépendante de vos besoins : YOLOv5, YOLOv7, etc.).  
-   - Paramétrez vos hyperparamètres (batch size, epochs, etc.) avant de démarrer.
+   - Le Notebook `train_model.ipynb` (dans `scripts/Notebooks/`) vous permet de lancer un entraînement YOLO (version dépendante de vos besoins).  
+   - Paramétrez vos hyperparamètres (batch size, epochs, etc.) avant de démarrer si vous le souhaitez.
 
 3. **Évaluation**  
-   - Utilisez le Notebook `test_model.ipynb` pour évaluer la performance du modèle sur le dossier de test (`data/dataset/test`) et générer des métriques (mAP, Recall, Precision, etc.).  
+   - Utilisez directement les informations généré par l'entrainnement par Yolo pour évaluer la performance du modèle observer les métriques (mAP, Recall, Precision, etc.).  
+
+3. **Visualisation**  
+   - Utilisez le Notebook `test_model_video_fast.ipynb` pour visualiser le résultat de la prédiction du modele sur une vidéo.  
 
 4. **Itérations et améliorations**  
    - Si les résultats ne sont pas satisfaisants, retournez à l’étape d’annotation ou ajustez votre data augmentation / hyperparamètres.  
